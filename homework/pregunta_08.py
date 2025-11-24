@@ -8,22 +8,32 @@ utilizar pandas, numpy o scipy.
 
 def pregunta_08():
     """
-    Genere una lista de tuplas, donde el primer elemento de cada tupla
-    contiene  el valor de la segunda columna; la segunda parte de la tupla
-    es una lista con las letras (ordenadas y sin repetir letra) de la
-    primera  columna que aparecen asociadas a dicho valor de la segunda
-    columna.
-
-    Rta/
-    [(0, ['C']),
-     (1, ['B', 'E']),
-     (2, ['A', 'E']),
-     (3, ['A', 'B', 'D', 'E']),
-     (4, ['B', 'E']),
-     (5, ['B', 'C', 'D', 'E']),
-     (6, ['A', 'B', 'C', 'E']),
-     (7, ['A', 'C', 'D', 'E']),
-     (8, ['A', 'B', 'D', 'E']),
-     (9, ['A', 'B', 'C', 'E'])]
-
+    Genera una lista de tuplas donde:
+    - Primer elemento: valor de la segunda columna (número)
+    - Segundo elemento: lista ordenada y sin repetir de las letras
+      de la primera columna asociadas a ese número
     """
+
+    asociaciones = {}
+
+    with open("files\input\data.csv", "r", encoding="utf-8") as f:
+        for linea in f:
+            partes = linea.strip().split("\t")
+
+            letra = partes[0]          # columna 1
+            valor = int(partes[1])     # columna 2
+
+            # Inicializa si no existe
+            if valor not in asociaciones:
+                asociaciones[valor] = set()   # usamos set para evitar repeticiones
+
+            asociaciones[valor].add(letra)
+
+    # Construcción del resultado ordenando claves y listas
+    resultado = []
+
+    for valor in sorted(asociaciones.keys()):
+        lista_ordenada = sorted(list(asociaciones[valor]))
+        resultado.append((valor, lista_ordenada))
+
+    return resultado

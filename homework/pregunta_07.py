@@ -8,20 +8,25 @@ utilizar pandas, numpy o scipy.
 
 def pregunta_07():
     """
-    Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla
-    contiene un valor posible de la columna 2 y una lista con todas las letras
-    asociadas (columna 1) a dicho valor de la columna 2.
-
-    Rta/
-    [(0, ['C']),
-     (1, ['E', 'B', 'E']),
-     (2, ['A', 'E']),
-     (3, ['A', 'B', 'D', 'E', 'E', 'D']),
-     (4, ['E', 'B']),
-     (5, ['B', 'C', 'D', 'D', 'E', 'E', 'E']),
-     (6, ['C', 'E', 'A', 'B']),
-     (7, ['A', 'C', 'E', 'D']),
-     (8, ['E', 'D', 'E', 'A', 'B']),
-     (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
-
+    Retorne una lista de tuplas que asocien las columnas 2 y 1.
+    Cada tupla contiene un valor posible de la columna 2 y una lista con todas
+    las letras asociadas a dicho valor.
     """
+
+    asociaciones = {}
+
+    with open("files\input\data.csv", "r", encoding="utf-8") as f:
+        for linea in f:
+            partes = linea.strip().split("\t")
+
+            letra = partes[0]          # columna 1
+            valor = int(partes[1])     # columna 2
+
+            if valor not in asociaciones:
+                asociaciones[valor] = [letra]
+            else:
+                asociaciones[valor].append(letra)
+
+    resultado = sorted(asociaciones.items())
+
+    return resultado
