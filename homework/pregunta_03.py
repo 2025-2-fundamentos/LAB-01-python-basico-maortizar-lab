@@ -17,7 +17,7 @@ def pregunta_03():
 
     suma_por_letra = {}
 
-    with open("files\input\data.csv", "r", encoding="utf-8") as f:
+    with open("files/input/data.csv", "r", encoding="utf-8") as f:
         for linea in f:
             partes = linea.strip().split("\t")
             letra = partes[0]

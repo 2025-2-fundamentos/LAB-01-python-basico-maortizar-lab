@@ -16,7 +16,7 @@ def pregunta_10():
 
     resultado = []
 
-    with open("files\input\data.csv", "r", encoding="utf-8") as f:
+    with open("files/input/data.csv", "r", encoding="utf-8") as f:
         for linea in f:
             partes = linea.strip().split("\t")
 
